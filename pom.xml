@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.hexarchbook.bluezone</groupId>
+	<artifactId>bluezone</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>pom</packaging>
+
+	<name>BlueZone Aggregate and Parent Project</name>
+
+	<modules>
+		<module>src/application/bluezone-app</module>
+		<module>src/application/bluezone-lib</module>
+		<module>src/outside/driving/bluezone-driving-forparkingcars-actor-test</module>
+		<module>src/outside/driving/bluezone-driving-forparkingcars-adapter-webui</module>
+		<module>src/outside/driving/bluezone-driving-forissuingfines-actor-test</module>
+		<module>src/outside/driving/bluezone-driving-forissuingfines-adapter-cli</module>
+		<module>src/outside/driven/bluezone-driven-forpaying-actor-testdouble</module>
+		<module>src/outside/driven/bluezone-driven-forstoringdata-actor-testdouble</module>
+		<module>src/outside/driven/bluezone-driven-forstoringdata-adapter-mongodb</module>
+		<module>src/outside/driven/bluezone-driven-forobtainingdatetime-actor-testdouble</module>
+		<module>src/outside/driven/bluezone-driven-forobtainingdatetime-adapter-sysclock</module>
+		<module>src/outside/bluezone-startup</module>
+	</modules>
+
+	<properties>
+		<!-- Char encoding -->
+		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+		<!-- Java -->
+		<java.version>17</java.version>
+		<!-- Plugins -->
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<!-- Version of maven dependencies -->
+		<spring.boot.version>2.7.18</spring.boot.version>
+		<lombok.version>1.18.20</lombok.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Boot Dependencies without starter parent -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!-- Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<verbose>false</verbose>
+					<optimize>true</optimize>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

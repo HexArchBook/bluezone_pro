@@ -1,0 +1,14 @@
+# MAVEN
+target/
+# ECLIPSE
+.settings/
+.project
+.classpath
+# IDEA
+.idea/
+*.iml
+# SPRING INITIALIZR
+.mvn/
+HELP.md
+mvnw
+mvnw.cmd

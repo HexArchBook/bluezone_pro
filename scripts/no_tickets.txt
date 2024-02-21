@@ -1,0 +1,1 @@
+ticketCode  carPlate    rateName    startingDateTime(yyyyMMddHHmm)  endingDateTime(yyyyMMddHHmm)    price   paymentId

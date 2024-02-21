@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html th:replace="~{mainlayout :: layout(~{::div})}" xmlns:th="http://www.thymeleaf.org">
+<div>
+        <h3>Ticket successfully paid</h3>
+        <hr>
+        <p>You've just bought the following ticket for parking your car</p>
+        <div class="row pt-3">
+                <div class="col text-end">Ticket code:</div>
+                <div class="col text-start"><span th:text="${ticket.ticketCode}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Car plate:</div>
+                <div class="col text-start"><span th:text="${ticket.carPlate}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Rate name:</div>
+                <div class="col text-start"><span th:text="${ticket.rateName}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Starting date-time:</div>
+                <div class="col text-start"><span th:text="${#temporals.format(ticket.startingDateTime,'yyyy/MM/dd HH:mm')}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Ending date-time:</div>
+                <div class="col text-start"><span th:text="${#temporals.format(ticket.endingDateTime,'yyyy/MM/dd HH:mm')}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Price (€):</div>
+                <div class="col text-start"><span th:text="${ticket.price}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col text-end">Payment identifier:</div>
+                <div class="col text-start"><span th:text="${ticket.paymentId}"></span></div>
+        </div>
+        <div class="row pt-3">
+                <div class="col">
+                        <a th:href="@{/}" class="btn btn-dark" role="button">Go To BlueZone Home Page</a>
+                </div>
+        </div>
+</div>
+</html>

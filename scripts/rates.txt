@@ -1,0 +1,4 @@
+name    eurosPerHour
+Blue    0.75
+Green   0.80
+Red     0.90

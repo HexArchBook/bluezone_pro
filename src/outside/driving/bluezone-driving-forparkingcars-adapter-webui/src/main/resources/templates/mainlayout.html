@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html th:fragment="layout (content)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BlueZone Application</title>
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.0.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" th:href="@{/}">Home</a>
+        <a class="navbar-brand" th:href="@{/buyticket}">Park a car</a>
+    </nav>
+    <main role="main" class="container">
+        <div th:insert="${content}" class="starter-template"></div>
+    </main>
+    <footer class="footer bg-dark">2023 - <a target="_blank" href="">Hexagonal Architecture book</a></footer>
+    <script type="text/javascript" th:src="@{webjars/bootstrap/5.0.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

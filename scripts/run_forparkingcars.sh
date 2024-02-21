@@ -1,0 +1,1 @@
+java -p ./src/outside/bluezone-startup/target/bzmodulepath --add-modules ALL-SYSTEM -m bluezone.startup/io.github.hexarchbook.bluezone.startup.BlueZoneRunner ./scripts/ports_adapters.properties ./scripts/driven_actors.properties ForParkingCars

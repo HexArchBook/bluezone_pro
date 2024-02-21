@@ -1,0 +1,3 @@
+ticketCode  carPlate    rateName    startingDateTime(yyyyMMddHHmm)  endingDateTime(yyyyMMddHHmm)    price   paymentId
+0000000001  1111BBB     Blue        202402081715                    202402081915                    1.50    da03fc4d-3008-4ee0-880b-bff54d5470b4
+0000000002  2222CCC     Red         202402091030                    202402091100                    0.45    e94851af-4eba-4535-ac6a-8266f4a8ccf2

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Don't output logback own status at the start -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <!-- The log file is the value of the system property with key "bluezone.log.file" -->
+    <property name="LOG_FILE" value="${bluezone.log.file}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_FILE}</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <!--    <appender-ref ref="CONSOLE" />-->
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

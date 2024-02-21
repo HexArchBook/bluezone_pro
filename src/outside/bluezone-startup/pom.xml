@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.github.hexarchbook.bluezone</groupId>
+		<artifactId>bluezone</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>bluezone-startup</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>BlueZone Startup</name>
+
+	<properties>
+		<maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
+		<bluezone.mp>${project.build.directory}/bzmodulepath</bluezone.mp>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-app</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driving-forparkingcars-actor-test</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driving-forparkingcars-adapter-webui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driving-forissuingfines-actor-test</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driving-forissuingfines-adapter-cli</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driven-forstoringdata-actor-testdouble</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driven-forstoringdata-adapter-mongodb</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driven-forpaying-actor-testdouble</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driven-forobtainingdatetime-actor-testdouble</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.hexarchbook.bluezone</groupId>
+			<artifactId>bluezone-driven-forobtainingdatetime-adapter-sysclock</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven.dependency.plugin.version}</version><!--$NO-MVN-MAN-VER$ -->
+				<executions>
+					<execution>
+						<!--
+							Copy dependencies (including transitive) to modulepath directory.
+							In 'verify' phase: After package, before install.
+						-->
+						<id>copy-to-modulepath</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${bluezone.mp}</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<excludeTransitive>false</excludeTransitive>
+							<excludeArtifactIds>aopalliance</excludeArtifactIds>
+						</configuration>
+					</execution>
+					<!--
+						Copy startup jar to modulepath directory.
+						In 'verify' phase: After package, before install.
+					-->
+					<execution>
+						<id>copy-startup-to-modulepath</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<outputDirectory>${bluezone.mp}</outputDirectory>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
