@@ -16,9 +16,9 @@ public class ForIssuingFinesTestRunner implements DrivingActor {
 
 	private static final Class[] TEST_CLASSES_TO_RUN = new Class[] { CheckCarTests.class };
 	private static final String REPORTS_DIRECTORY = System.getProperty("user.home") + File.separator + 
-													".bluezoneapp" + File.separator +
+													"bluezone" + File.separator +
+													"tests" + File.separator +
 													"forissuingfines" + File.separator +
-													"testng-reports" + File.separator +
 													Instant.now().toEpochMilli();
 	private static final String TEST_RESULTS_REPORT = REPORTS_DIRECTORY + File.separator + "index.html";
 	private static final String EMAILABLE_REPORT = REPORTS_DIRECTORY + File.separator + "emailable-report.html";

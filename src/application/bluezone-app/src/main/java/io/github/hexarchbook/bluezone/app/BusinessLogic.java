@@ -13,12 +13,16 @@ import io.github.hexarchbook.bluezone.app.ports.driving.forparkingcars.BuyTicket
 import io.github.hexarchbook.bluezone.app.usecases.BuyTicket;
 import io.github.hexarchbook.bluezone.app.usecases.CheckCar;
 import io.github.hexarchbook.bluezone.app.usecases.GetAvailableRates;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 public class BusinessLogic implements BlueZoneApp {
+
+    private final Logger logger = LoggerFactory.getLogger(BusinessLogic.class);
 
     private final ForStoringData dataRepository;
     private final ForPaying paymentService;
@@ -31,6 +35,7 @@ public class BusinessLogic implements BlueZoneApp {
         this.dataRepository = dataRepository;
         this.paymentService = paymentService;
         this.dateTimeService = dateTimeService;
+        logger.info("Application(Hexagon) with business logic instantiated.");
     }
 
     @Override

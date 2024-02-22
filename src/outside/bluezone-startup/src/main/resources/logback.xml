@@ -4,8 +4,8 @@
     <!-- Don't output logback own status at the start -->
     <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
-    <!-- The log file is the value of the system property with key "bluezone.log.file" -->
-    <property name="LOG_FILE" value="${bluezone.log.file}"/>
+    <!-- The log file is the value of the "bluezone.log.file" system property -->
+    <property name="LOG_FILE_PATH" value="${log.file.path}"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -13,16 +13,28 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_FILE}</file>
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PATH}${file.separator}bluezone.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}${file.separator}archived/bluezone.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- max size of each archived file -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archived files, old archived files will be deleted -->
+            <totalSizeCap>5GB</totalSizeCap>
+            <!-- number of days to keep the archived files -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
         <encoder>
+<!--            <pattern>%d %p %c{1.} [%t] %m%n</pattern>-->
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
         </encoder>
     </appender>
 
+    <logger name="org.mongodb.driver" level="WARN"></logger>
+
     <root level="INFO">
         <!--    <appender-ref ref="CONSOLE" />-->
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE-ROLLING"/>
     </root>
 
 </configuration>

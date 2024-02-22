@@ -10,17 +10,17 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * Driven actor that implements "forpaying" port with a "spy" test-double.
+ * Driven actor that implements "forpaying" port with a "mock" test-double.
  */
 @DrivenActor(name="test-double")
-public class SpyPaymentService implements ForPaying {
+public class MockPaymentService implements ForPaying {
 
     private PayRequest payRequest;
     private String paymentId;
     private PayError payError;
     private int errorPercentage;
 
-    public SpyPaymentService() {
+    public MockPaymentService() {
         this.payRequest = null;
         this.paymentId = "";
         this.payError = null;

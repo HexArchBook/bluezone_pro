@@ -1,5 +1,5 @@
 import io.github.hexarchbook.bluezone.app.ports.driven.forpaying.ForPaying;
-import io.github.hexarchbook.bluezone.driven.forpaying.actor.testdouble.SpyPaymentService;
+import io.github.hexarchbook.bluezone.driven.forpaying.actor.testdouble.MockPaymentService;
 
 module bluezone.driven.forpaying.actor.testdouble {
 
@@ -19,6 +19,6 @@ module bluezone.driven.forpaying.actor.testdouble {
 	 * Java Service Provider
 	 */
 	provides ForPaying
-		with SpyPaymentService;
+		with MockPaymentService;
 
 }

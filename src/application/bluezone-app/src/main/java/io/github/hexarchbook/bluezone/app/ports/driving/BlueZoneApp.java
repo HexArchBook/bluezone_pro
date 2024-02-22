@@ -18,7 +18,7 @@ public interface BlueZoneApp extends ForParkingCars, ForIssuingFines, ForAdminis
         return new BusinessLogic(dataRepository,paymentService,dateTimeService);
     }
 
-    static BlueZoneApp getInstance() {
-        return null;
+    public static BlueZoneApp getInstance() {
+        throw new RuntimeException("No test-double has been implemented for the Application(Hexagon)");
     }
 }

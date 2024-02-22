@@ -1,9 +1,3 @@
-# bluezone_pro
-
-Private repo for developing the BlueZone application for the book.
-
-------------------------------------------------------------------
-
 # BlueZone
 ## An example application implementing Hexagonal Architecture
 
@@ -11,34 +5,34 @@ Private repo for developing the BlueZone application for the book.
 
 __BlueZone__ allows car drivers to pay remotely for parking cars at regulated zones in a city, instead of paying with coins using parking meters.
 
-- Users (driving actors) of the application are _car drivers_ and _parking inspectors_.
+- Driving actors using the application are _car drivers_ and _parking inspectors_.
 
   - Car drivers will access the application using a Web UI (User Interface), and they can do the following:
     
-    - Ask for the available rates in the city, in order to choose the one of the zone he wants to park the car at.
-    - Buy a ticket for parking the car during a period of time at a regulated zone. This period starts at current date-time. The ending date-time is calculated from the paid amount, according to the rate of the zone.
+    - Ask for the available rates in the city, in order to choose the one of the zone they want to park the car at.
+    - Buy a ticket for parking the car during a period of time at a regulated zone. This period starts at current date-time. The ending date-time is calculated from the paid amount, according to the rate (euros/hour) of the zone.
 
   - Parking inspectors will access the application using a terminal with a CLI (Command Line Interface), and they can do the following:
   
-    - Check whether a car is illegally parked at a zone. This will happen if there is no valid ticket for the car and the rate of the zone. A ticket is valid if current date-time is between the starting and ending date-time of the ticket period.
+    - Check a car for issuing a fine, in case that the car is illegally parked at a zone. This will happen if there is no active ticket for the car and the rate of the zone. A ticket is active if current date-time is between the starting and ending date-time of the ticket period.
     
 - Driven actors needed by the application are:
 
-  - Repository with the data (rates and tickets) used in the application.
+  - Repository with the data (rates and tickets) used in the application. It also has a sequence for getting ticket codes as they are needed.
 
-  - Payment service.
+  - Payment service that allows the car driver to buy tickets using a card. Obviously, no adapter for a real service has been developed, just a test-double (mock).
 
-  - Date-time service.
+  - Date-time service for obtaining the current date-time when needed, for buying a ticket and for checking a car.
 
 ### Development environment:
 
-- Java 11 (version "11.0.15.1" 2022-04-22 LTS)
+- Java 17 (OpenJDK version 17.0.2)
 
-- Maven 3.8.6
+- Maven 3.9.5
 
-- IntelliJ IDEA 2021.3.3 (Community Edition)
+- IntelliJ IDEA 2023.1.5 (Community Edition)
 
-- Ubuntu 20.04.4 LTS (Linux 5.13.0-40-generic)
+- Ubuntu 20.04.6 LTS (Linux 5.15.0-86-generic)
 
 ### Instructions:
 
@@ -51,12 +45,22 @@ __BlueZone__ allows car drivers to pay remotely for parking cars at regulated zo
     ./scripts/build.sh
     ~~~
 
-- Select the adapters to be plugged-in at each port, editing the "ports-adapters.properties" file, located in the "<bluezone_dir>/scripts" directory.
+- Select the adapters to be plugged-in at each port, editing the "ports_adapters.properties" file, located in the "<bluezone_dir>/config" directory.
+ 
+- Initialize the driven actors as you need, editing the "driven_actors.properties" file, located in the "<bluezone_dir>/config/driven-side" directory.
 
-
-- Run the entry point to the app:
+- Run the driving actor you want by executing the script:
 
     ~~~
     cd <bluezone_dir>
-    ./scripts/run_bluezone.sh
-    ~~~
+    ./scripts/run_forparkingcars.sh
+  ~~~
+
+or
+
+  ~~~
+    cd <bluezone_dir>
+    ./scripts/run_forissuingfines.sh
+  ~~~
+
+- If you chose to run the Web UI at the "for parking cars" port, the URL is http://localhost:8080/bluezone/

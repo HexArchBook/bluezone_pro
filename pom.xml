@@ -29,7 +29,7 @@
 	</modules>
 
 	<properties>
-		<!-- Char encoding -->
+  		<!-- Char encoding -->
 		<project.encoding>UTF-8</project.encoding>
 		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
@@ -38,7 +38,7 @@
 		<!-- Plugins -->
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<!-- Version of maven dependencies -->
-		<spring.boot.version>2.7.18</spring.boot.version>
+		<spring-boot.version>2.7.18</spring-boot.version>
 		<lombok.version>1.18.20</lombok.version>
 	</properties>
 
@@ -48,7 +48,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot.version}</version>
+				<version>${spring-boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -74,7 +74,6 @@
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<verbose>false</verbose>
-					<optimize>true</optimize>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<annotationProcessorPaths>

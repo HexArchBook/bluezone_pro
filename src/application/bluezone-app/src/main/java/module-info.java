@@ -9,6 +9,7 @@ module bluezone.app {
 	 */
 	requires bluezone.lib;
 	requires static lombok;
+	requires org.slf4j;
 
 	/**
 	 * Packages published to other modules

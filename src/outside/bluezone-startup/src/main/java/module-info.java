@@ -18,6 +18,7 @@ module bluezone.startup {
 	requires bluezone.driven.forobtainingdatetime.actor.testdouble;
 	requires bluezone.lib;
 	requires static lombok;
+	requires org.slf4j;
 
 	/*
 	 * Java Services

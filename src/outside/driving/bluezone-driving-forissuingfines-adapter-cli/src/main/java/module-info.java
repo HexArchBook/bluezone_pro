@@ -6,6 +6,7 @@ module bluezone.driving.forissuingfines.adapter.cli {
 	requires bluezone.app;
 	requires static lombok;
     requires bluezone.lib;
+	requires org.slf4j;
 
     /*
 	 * Packages published to other modules

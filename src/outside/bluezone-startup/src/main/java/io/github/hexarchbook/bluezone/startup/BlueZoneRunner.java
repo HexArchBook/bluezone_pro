@@ -2,6 +2,9 @@ package io.github.hexarchbook.bluezone.startup;
 
 import io.github.hexarchbook.bluezone.lib.hexagonal.DrivingActor;
 import io.github.hexarchbook.bluezone.lib.javautils.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -14,26 +17,31 @@ import java.util.Properties;
  */
 public class BlueZoneRunner {
 
-    private static final String LOG_FILE_KEY = "bluezone.log.file";
-    private static final String LOG_FILE = System.getProperty("user.home") + System.getProperty("file.separator") + "bluezone" + System.getProperty("file.separator") + "logs" + System.getProperty("file.separator") + "bluezone.log";
+    private static final String LOG_FILE_PATH = System.getProperty("user.home") + System.getProperty("file.separator") + "bluezone" + System.getProperty("file.separator") + "logs";
 
     public static void main (String[] args ) {
-        System.setProperty(LOG_FILE_KEY, LOG_FILE);
-        System.out.println("Starting-up 'BlueZone' system... Log messages will be output to file '"+System.getProperty(LOG_FILE_KEY)+"'");
-        if (args==null || args.length!=3 ) {
-            System.out.println("Wrong arguments. Usage: " + BlueZoneRunner.class.getSimpleName() + " ports_adapters_file driven_actors_file driving_port_name");
-            return;
+        try {
+            System.setProperty("log.file.path", LOG_FILE_PATH);
+            System.out.println("Starting-up 'BlueZone' system... Log messages will be output to files at '" + System.getProperty("log.file.path") + "'");
+            if (args == null || args.length != 3) {
+                System.out.println("Wrong arguments. Usage: " + BlueZoneRunner.class.getSimpleName() + " ports_adapters_file driven_actors_file driving_port_name");
+                return;
+            }
+            Properties portsAdaptersProperties = FileUtils.propertiesFromFile(Paths.get(args[0]));
+            Properties drivenActorsProperties = FileUtils.propertiesFromFile(Paths.get(args[1]));
+            String drivingPortToRun = args[2];
+
+            Configurator configurator = new Configurator(portsAdaptersProperties, drivenActorsProperties);
+
+            DrivingActor drivingActor = configurator.buildDrivingActor(drivingPortToRun);
+
+            drivingActor.run();
+
+        } catch (Exception exception) {
+            BlueZoneLogger blueZoneLogger = new BlueZoneLogger ( LoggerFactory.getLogger(BlueZoneRunner.class) );
+            blueZoneLogger.getLogger().error("An error occurred starting-up 'BlueZone' system",exception);
+            System.out.println(exception.getMessage());
         }
-        Properties portsAdaptersProperties = FileUtils.propertiesFromFile ( Paths.get(args[0]) );
-        Properties drivenActorsProperties = FileUtils.propertiesFromFile ( Paths.get(args[1]) );
-        String drivingPortToRun = args[2];
-
-        Configurator configurator = new Configurator(portsAdaptersProperties,drivenActorsProperties);
-
-        DrivingActor drivingActor = configurator.buildDrivingActor(drivingPortToRun);
-
-        drivingActor.run();
-
     }
 
 }
